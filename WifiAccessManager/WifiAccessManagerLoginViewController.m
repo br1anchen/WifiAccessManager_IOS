@@ -7,6 +7,7 @@
 //
 
 #import "WifiAccessManagerLoginViewController.h"
+#import "HttpRequestUtilities.h"
 
 @interface WifiAccessManagerLoginViewController ()
 
@@ -38,7 +39,19 @@
 - (IBAction)userLogin:(id)sender {
     self.email = self.email_input.text;
     self.password = self.pwd_input.text;
+    
     NSString *loginInfo = [NSString stringWithFormat:@"WifiAccess Manager:Login:email: %@, pwd: %@",self.email,self.password];
     NSLog(@"%@", loginInfo);
+    
+    HttpRequestUtilities *httpHelper = [[HttpRequestUtilities alloc] init];
+    
+    if([httpHelper loginRequest:self.email withPassword:self.password])
+    {
+        NSLog(@"Login Success.");
+        [self performSegueWithIdentifier: @"afterLogin" sender: self];
+    }else{
+        NSLog(@"Login Failed.");
+    }
 }
+
 @end

@@ -74,6 +74,7 @@
                     <connections>
                         <outlet property="email_input" destination="l7p-1e-WFM" id="bRf-69-WmJ"/>
                         <outlet property="pwd_input" destination="HvK-Zp-myJ" id="LwI-xw-sGL"/>
+                        <segue destination="pGg-6v-bdr" kind="push" identifier="afterLogin" id="fGh-6V-Y89"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g0L-MS-xBs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -90,7 +91,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" textLabel="2pz-XF-uhl" style="IBUITableViewCellStyleDefault" id="m0d-ak-lc9">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="m0d-ak-lc9" id="zLr-l8-O67">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>

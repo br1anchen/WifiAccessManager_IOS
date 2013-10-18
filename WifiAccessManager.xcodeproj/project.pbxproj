@@ -23,6 +23,8 @@
 		29B4055918116866004BC37E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 29B4055718116866004BC37E /* InfoPlist.strings */; };
 		29B4055B18116866004BC37E /* WifiAccessManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B4055A18116866004BC37E /* WifiAccessManagerTests.m */; };
 		29B4056618116C1B004BC37E /* WifiAccessManagerLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B4056518116C1B004BC37E /* WifiAccessManagerLoginViewController.m */; };
+		29B4057118118C3D004BC37E /* AppCommonUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B4056E18118C3D004BC37E /* AppCommonUtilities.m */; };
+		29B4057218118C3D004BC37E /* HttpRequestUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B4057018118C3D004BC37E /* HttpRequestUtilities.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,10 @@
 		29B4055A18116866004BC37E /* WifiAccessManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WifiAccessManagerTests.m; sourceTree = "<group>"; };
 		29B4056418116C1B004BC37E /* WifiAccessManagerLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiAccessManagerLoginViewController.h; sourceTree = "<group>"; };
 		29B4056518116C1B004BC37E /* WifiAccessManagerLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiAccessManagerLoginViewController.m; sourceTree = "<group>"; };
+		29B4056D18118C3D004BC37E /* AppCommonUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppCommonUtilities.h; sourceTree = "<group>"; };
+		29B4056E18118C3D004BC37E /* AppCommonUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppCommonUtilities.m; sourceTree = "<group>"; };
+		29B4056F18118C3D004BC37E /* HttpRequestUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestUtilities.h; sourceTree = "<group>"; };
+		29B4057018118C3D004BC37E /* HttpRequestUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequestUtilities.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +124,10 @@
 		29B4053218116865004BC37E /* WifiAccessManager */ = {
 			isa = PBXGroup;
 			children = (
+				29B4056D18118C3D004BC37E /* AppCommonUtilities.h */,
+				29B4056E18118C3D004BC37E /* AppCommonUtilities.m */,
+				29B4056F18118C3D004BC37E /* HttpRequestUtilities.h */,
+				29B4057018118C3D004BC37E /* HttpRequestUtilities.m */,
 				29B4053B18116865004BC37E /* WifiAccessManagerAppDelegate.h */,
 				29B4053C18116865004BC37E /* WifiAccessManagerAppDelegate.m */,
 				29B4053E18116865004BC37E /* Main.storyboard */,
@@ -265,9 +275,11 @@
 			files = (
 				29B4054618116865004BC37E /* WifiAccessManagerDetailViewController.m in Sources */,
 				29B4056618116C1B004BC37E /* WifiAccessManagerLoginViewController.m in Sources */,
+				29B4057218118C3D004BC37E /* HttpRequestUtilities.m in Sources */,
 				29B4053918116865004BC37E /* main.m in Sources */,
 				29B4054318116865004BC37E /* WifiAccessManagerMasterViewController.m in Sources */,
 				29B4053D18116865004BC37E /* WifiAccessManagerAppDelegate.m in Sources */,
+				29B4057118118C3D004BC37E /* AppCommonUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +492,7 @@
 				29B4056018116866004BC37E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		29B4056118116866004BC37E /* Build configuration list for PBXNativeTarget "WifiAccessManagerTests" */ = {
 			isa = XCConfigurationList;
@@ -488,6 +501,7 @@
 				29B4056318116866004BC37E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

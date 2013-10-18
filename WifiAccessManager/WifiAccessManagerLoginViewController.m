@@ -35,4 +35,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)userLogin:(id)sender {
+    self.email = self.email_input.text;
+    self.password = self.pwd_input.text;
+    NSString *loginInfo = [NSString stringWithFormat:@"WifiAccess Manager:Login:email: %@, pwd: %@",self.email,self.password];
+    NSLog(@"%@", loginInfo);
+}
 @end

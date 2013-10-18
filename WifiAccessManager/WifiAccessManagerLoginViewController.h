@@ -10,4 +10,11 @@
 
 @interface WifiAccessManagerLoginViewController : UIViewController
 
+@property (strong, nonatomic) NSString  *email;
+@property (strong, nonatomic) NSString  *password;
+
+@property (weak, nonatomic) IBOutlet UITextField *email_input;
+@property (weak, nonatomic) IBOutlet UITextField *pwd_input;
+
+- (IBAction)userLogin:(id)sender;
 @end

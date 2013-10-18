@@ -22,6 +22,7 @@
 		29B4055118116866004BC37E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B4053018116865004BC37E /* UIKit.framework */; };
 		29B4055918116866004BC37E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 29B4055718116866004BC37E /* InfoPlist.strings */; };
 		29B4055B18116866004BC37E /* WifiAccessManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B4055A18116866004BC37E /* WifiAccessManagerTests.m */; };
+		29B4056618116C1B004BC37E /* WifiAccessManagerLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B4056518116C1B004BC37E /* WifiAccessManagerLoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		29B4055618116866004BC37E /* WifiAccessManagerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WifiAccessManagerTests-Info.plist"; sourceTree = "<group>"; };
 		29B4055818116866004BC37E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		29B4055A18116866004BC37E /* WifiAccessManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WifiAccessManagerTests.m; sourceTree = "<group>"; };
+		29B4056418116C1B004BC37E /* WifiAccessManagerLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiAccessManagerLoginViewController.h; sourceTree = "<group>"; };
+		29B4056518116C1B004BC37E /* WifiAccessManagerLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WifiAccessManagerLoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +127,8 @@
 				29B4054518116865004BC37E /* WifiAccessManagerDetailViewController.m */,
 				29B4054718116866004BC37E /* Images.xcassets */,
 				29B4053318116865004BC37E /* Supporting Files */,
+				29B4056418116C1B004BC37E /* WifiAccessManagerLoginViewController.h */,
+				29B4056518116C1B004BC37E /* WifiAccessManagerLoginViewController.m */,
 			);
 			path = WifiAccessManager;
 			sourceTree = "<group>";
@@ -205,6 +210,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Brian Chen";
 				TargetAttributes = {
+					29B4052818116865004BC37E = {
+						DevelopmentTeam = Z9P3BB4XXQ;
+					};
 					29B4054C18116866004BC37E = {
 						TestTargetID = 29B4052818116865004BC37E;
 					};
@@ -256,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29B4054618116865004BC37E /* WifiAccessManagerDetailViewController.m in Sources */,
+				29B4056618116C1B004BC37E /* WifiAccessManagerLoginViewController.m in Sources */,
 				29B4053918116865004BC37E /* main.m in Sources */,
 				29B4054318116865004BC37E /* WifiAccessManagerMasterViewController.m in Sources */,
 				29B4053D18116865004BC37E /* WifiAccessManagerAppDelegate.m in Sources */,
@@ -385,10 +394,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WifiAccessManager/WifiAccessManager-Prefix.pch";
 				INFOPLIST_FILE = "WifiAccessManager/WifiAccessManager-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -398,10 +409,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WifiAccessManager/WifiAccessManager-Prefix.pch";
 				INFOPLIST_FILE = "WifiAccessManager/WifiAccessManager-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

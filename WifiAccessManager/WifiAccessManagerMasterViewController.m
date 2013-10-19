@@ -42,6 +42,7 @@
     deviceName = @"request Name";
     deviceMac = @"00:00:00:00:00:00";
     deviceAccess = FALSE;
+    _objects = [[NSMutableArray alloc] init];
     
     NSUserDefaults *userPrefs = [NSUserDefaults standardUserDefaults];
     NSString *userId = [userPrefs stringForKey:@"Email"];
@@ -69,9 +70,17 @@
             NSLog(@"DEVICEMAC: %@",deviceMac_data);
             NSLog(deviceAccess_data ? @"Yes" : @"No");
             
+            DeviceDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                          deviceName_data, deviceName,
+                          deviceMac_data, deviceMac,
+                          deviceAccess_data,deviceAccess,
+                          nil];
+            [_objects addObject:DeviceDictionary];
         }
 
     }
+    
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -104,10 +113,29 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    static NSString *CellIdentifier = @"Device";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell=[[UITableViewCell alloc]initWithStyle:
+              UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    
+    
+    NSDictionary *tmpDict = [_objects objectAtIndex:indexPath.row];
+    
+    NSMutableString *text;
+    text = [NSMutableString stringWithFormat:@"%@",
+            [tmpDict objectForKeyedSubscript:deviceName]];
+    
+    NSMutableString *detail;
+    detail = [NSMutableString stringWithFormat:@"MAC Address: %@ ",
+              [tmpDict objectForKey:deviceMac]];
+    
+    
+    cell.textLabel.text = text;
+    cell.detailTextLabel.text= detail;
+    
     return cell;
 }
 

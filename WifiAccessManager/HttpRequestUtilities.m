@@ -7,15 +7,15 @@
 //
 
 #import "HttpRequestUtilities.h"
+#import "AppCommonUtilities.h"
 
 @implementation HttpRequestUtilities
-
 
 - (BOOL)loginRequest:(NSString *)email withPassword:(NSString *)pwd
 {
     __block BOOL loginResult;
     
-    NSString *loginUrl = @"http://129.241.200.170:8080/admin/mobile/loginapp.php";
+    NSString *loginUrl = [managerServerUrl stringByAppendingString:@"/admin/mobile/loginapp.php"];
     
     NSURL *url=[NSURL URLWithString:loginUrl];
     
@@ -34,7 +34,7 @@
         completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
             if (response) {
                 NSHTTPURLResponse* newResp = (NSHTTPURLResponse*)response;
-                NSLog(@"%d", newResp.statusCode);
+                NSLog(@"%ld", (long)newResp.statusCode);
                 loginResult = true;
             }
             else {

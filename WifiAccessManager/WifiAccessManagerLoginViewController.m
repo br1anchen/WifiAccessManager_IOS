@@ -48,6 +48,10 @@
     if([httpHelper loginRequest:self.email withPassword:self.password])
     {
         NSLog(@"Login Success.");
+        NSUserDefaults *userPref = [NSUserDefaults standardUserDefaults];
+        [userPref setValue:self.email forKey:@"Email"];
+        [userPref synchronize];
+        
         [self performSegueWithIdentifier: @"afterLogin" sender: self];
     }else{
         NSLog(@"Login Failed.");

@@ -8,13 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *managerServerUrl;
+
 @interface AppCommonUtilities : NSObject
-{
-    NSString *URL_SERVER;
-}
-
-@property(nonatomic,retain)NSString *URL_SERVER;
-
-+(AppCommonUtilities*)getInstance;
 
 @end

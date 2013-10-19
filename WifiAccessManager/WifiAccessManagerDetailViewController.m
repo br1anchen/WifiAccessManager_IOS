@@ -31,7 +31,8 @@
     // Update the user interface for the detail item.
 
     if (self.detailItem) {
-        self.detailDescriptionLabel.text = [self.detailItem description];
+        NSString *detailInfo = [NSString stringWithFormat:@"%@:%@, Access: %@",[self.detailItem objectForKey:@"request Name"],[self.detailItem objectForKey:@"request Mac"],[self.detailItem objectForKey:@"request Result"] ? @"Yes" : @"No"];
+        self.detailDescriptionLabel.text = detailInfo;
     }
 }
 

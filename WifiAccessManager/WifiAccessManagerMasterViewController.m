@@ -19,7 +19,7 @@
     // Define keys
     NSString *deviceName;
     NSString *deviceMac;
-    BOOL deviceAccess;
+    NSString *deviceAccess;
 }
 @end
 
@@ -40,8 +40,8 @@
     self.navigationItem.rightBarButtonItem = addButton;
     
     deviceName = @"request Name";
-    deviceMac = @"00:00:00:00:00:00";
-    deviceAccess = FALSE;
+    deviceMac = @"request Mac";
+    deviceAccess = @"request Result";
     _objects = [[NSMutableArray alloc] init];
     
     NSUserDefaults *userPrefs = [NSUserDefaults standardUserDefaults];
@@ -175,8 +175,8 @@
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = _objects[indexPath.row];
-        [[segue destinationViewController] setDetailItem:object];
+        NSDictionary *selectedDict = [_objects objectAtIndex:indexPath.row];
+        [[segue destinationViewController] setDetailItem:selectedDict];
     }
 }
 

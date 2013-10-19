@@ -46,4 +46,35 @@
     return loginResult;
 }
 
+- (NSData *)getRequestDevices:(NSString *)userId
+{
+    __block NSData *responseData;
+    
+    NSString *getDevicesUrl = [managerServerUrl stringByAppendingString:@"/admin/common/getclients.php"];
+    
+    NSURL *url=[NSURL URLWithString:getDevicesUrl];
+    
+    NSMutableURLRequest *requst = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:120];
+    
+    NSString* postDataString  = [NSString stringWithFormat:@"user_id=%@",userId];
+    
+    
+    [requst setHTTPMethod:@"POST"];
+    [requst setHTTPBody:[postDataString dataUsingEncoding:NSUTF8StringEncoding]];
+    [requst setValue:@"application/x-www-form-urlencoded;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+    [requst setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    NSURLResponse *response;
+    NSError *error;
+    
+    responseData = [NSURLConnection sendSynchronousRequest:requst returningResponse:&response error:&error];
+    
+    if(response){
+        return responseData;
+    }else{
+        return NULL;
+    }
+    
+}
+
 @end

@@ -11,4 +11,6 @@
 @interface HttpRequestUtilities : NSObject
 
 - (BOOL)loginRequest:(NSString *)email withPassword:(NSString *)pwd;
+- (NSData *)getRequestDevices:(NSString *)userId;
+
 @end

@@ -7,11 +7,19 @@
 //
 
 #import "WifiAccessManagerMasterViewController.h"
+#import "HttpRequestUtilities.h"
 
 #import "WifiAccessManagerDetailViewController.h"
 
 @interface WifiAccessManagerMasterViewController () {
     NSMutableArray *_objects;
+    
+    // A dictionary object
+    NSDictionary *DeviceDictionary;
+    // Define keys
+    NSString *deviceName;
+    NSString *deviceMac;
+    BOOL deviceAccess;
 }
 @end
 
@@ -30,6 +38,40 @@
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
+    
+    deviceName = @"request Name";
+    deviceMac = @"00:00:00:00:00:00";
+    deviceAccess = FALSE;
+    
+    NSUserDefaults *userPrefs = [NSUserDefaults standardUserDefaults];
+    NSString *userId = [userPrefs stringForKey:@"Email"];
+    
+    NSLog(@"%@",userId);
+    
+    HttpRequestUtilities *httpHelper = [[HttpRequestUtilities alloc] init];
+    NSData *deviceSources = [httpHelper getRequestDevices:userId];
+    
+    if(deviceSources != NULL){
+        id jsonObjects = [NSJSONSerialization JSONObjectWithData:
+                          deviceSources options:NSJSONReadingMutableContainers error:nil];
+        
+        for (NSDictionary *dataDict in jsonObjects) {
+            NSDictionary *client_data = [dataDict objectForKey:@"client"];
+            
+            NSDictionary *clientInfo_data = [client_data objectForKey:@"client_info"];
+            NSDictionary *permissions_data = [client_data objectForKey:@"permissions"];
+            
+            NSString *deviceName_data = [clientInfo_data objectForKey:@"name"];
+            NSString *deviceMac_data = [clientInfo_data objectForKey:@"mac"];
+            BOOL deviceAccess_data = (BOOL)[permissions_data objectForKey:@"allow"];
+            
+            NSLog(@"DEVICENAME: %@",deviceName_data);
+            NSLog(@"DEVICEMAC: %@",deviceMac_data);
+            NSLog(deviceAccess_data ? @"Yes" : @"No");
+            
+        }
+
+    }
 }
 
 - (void)didReceiveMemoryWarning

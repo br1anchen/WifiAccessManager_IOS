@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class WifiAccessManagerMasterViewController;
+
+@protocol WifiAccessManagerMasterViewControllerDelegate <NSObject>
+
+-(void)tableViewController:(WifiAccessManagerMasterViewController *)viewController didChangeEditing:(BOOL)editing;
+
+@end
+
 @interface WifiAccessManagerMasterViewController : UITableViewController
+
+@property (nonatomic, weak) id<WifiAccessManagerMasterViewControllerDelegate> delegate;
 
 @end

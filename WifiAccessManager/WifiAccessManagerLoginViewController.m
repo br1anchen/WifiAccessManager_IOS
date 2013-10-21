@@ -27,6 +27,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSUserDefaults *userPrefs = [NSUserDefaults standardUserDefaults];
+    NSString *userId = [userPrefs stringForKey:@"Email"];
+    
+    if(userId != NULL)
+    {
+        [self performSegueWithIdentifier: @"afterLogin" sender: self];
+    }
 	// Do any additional setup after loading the view.
 }
 

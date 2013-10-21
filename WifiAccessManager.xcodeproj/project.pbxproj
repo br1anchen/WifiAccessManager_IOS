@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29A212421814967500B637F0 /* TLSwipeForOptionsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A212411814967500B637F0 /* TLSwipeForOptionsCell.m */; };
 		29B4052D18116865004BC37E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B4052C18116865004BC37E /* Foundation.framework */; };
 		29B4052F18116865004BC37E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B4052E18116865004BC37E /* CoreGraphics.framework */; };
 		29B4053118116865004BC37E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B4053018116865004BC37E /* UIKit.framework */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		29A212401814967500B637F0 /* TLSwipeForOptionsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLSwipeForOptionsCell.h; sourceTree = "<group>"; };
+		29A212411814967500B637F0 /* TLSwipeForOptionsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLSwipeForOptionsCell.m; sourceTree = "<group>"; };
 		29B4052918116865004BC37E /* WifiAccessManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WifiAccessManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29B4052C18116865004BC37E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		29B4052E18116865004BC37E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -139,6 +142,8 @@
 				29B4053318116865004BC37E /* Supporting Files */,
 				29B4056418116C1B004BC37E /* WifiAccessManagerLoginViewController.h */,
 				29B4056518116C1B004BC37E /* WifiAccessManagerLoginViewController.m */,
+				29A212401814967500B637F0 /* TLSwipeForOptionsCell.h */,
+				29A212411814967500B637F0 /* TLSwipeForOptionsCell.m */,
 			);
 			path = WifiAccessManager;
 			sourceTree = "<group>";
@@ -278,6 +283,7 @@
 				29B4057218118C3D004BC37E /* HttpRequestUtilities.m in Sources */,
 				29B4053918116865004BC37E /* main.m in Sources */,
 				29B4054318116865004BC37E /* WifiAccessManagerMasterViewController.m in Sources */,
+				29A212421814967500B637F0 /* TLSwipeForOptionsCell.m in Sources */,
 				29B4053D18116865004BC37E /* WifiAccessManagerAppDelegate.m in Sources */,
 				29B4057118118C3D004BC37E /* AppCommonUtilities.m in Sources */,
 			);

@@ -8,10 +8,11 @@
 
 #import "WifiAccessManagerMasterViewController.h"
 #import "HttpRequestUtilities.h"
+#import "TLSwipeForOptionsCell.h"
 
 #import "WifiAccessManagerDetailViewController.h"
 
-@interface WifiAccessManagerMasterViewController () {
+@interface WifiAccessManagerMasterViewController () <TLSwipeForOptionsCellDelegate>{
     NSMutableArray *_objects;
     
     // A dictionary object
@@ -36,8 +37,10 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
+    UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(LogoutUser:)];
+    self.navigationItem.rightBarButtonItem = logoutButton;
+    
+    self.tableView.allowsMultipleSelectionDuringEditing = YES;
     
     deviceName = @"request Name";
     deviceMac = @"request Mac";
@@ -81,6 +84,8 @@
     }
     
     [self.tableView reloadData];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:TLSwipeForOptionsCellEnclosingTableViewDidBeginScrollingNotification object:self.tableView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -89,14 +94,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)insertNewObject:(id)sender
+- (void)LogoutUser:(id)sender
 {
-    if (!_objects) {
-        _objects = [[NSMutableArray alloc] init];
-    }
-    [_objects insertObject:[NSDate date] atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    NSUserDefaults *userPref = [NSUserDefaults standardUserDefaults];
+    [userPref removeObjectForKey:@"Email"];
+    [userPref synchronize];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Table View
@@ -113,28 +117,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Device";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell=[[UITableViewCell alloc]initWithStyle:
-              UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    }
-    
+    TLSwipeForOptionsCell *cell = [[TLSwipeForOptionsCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"Device"];
     
     NSDictionary *tmpDict = [_objects objectAtIndex:indexPath.row];
     
     NSMutableString *text;
-    text = [NSMutableString stringWithFormat:@"%@",
-            [tmpDict objectForKeyedSubscript:deviceName]];
-    
-    NSMutableString *detail;
-    detail = [NSMutableString stringWithFormat:@"MAC Address: %@ ",
-              [tmpDict objectForKey:deviceMac]];
-    
+    text = [NSMutableString stringWithFormat:@"%@  MAC: %@",
+            [tmpDict objectForKeyedSubscript:deviceName],[tmpDict objectForKey:deviceMac]];
     
     cell.textLabel.text = text;
-    cell.detailTextLabel.text= detail;
+    
+    cell.delegate = self;
     
     return cell;
 }
@@ -178,6 +172,60 @@
         NSDictionary *selectedDict = [_objects objectAtIndex:indexPath.row];
         [[segue destinationViewController] setDetailItem:selectedDict];
     }
+}
+
+-(void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing:editing animated:animated];
+    
+    [self.delegate tableViewController:self didChangeEditing:editing];
+}
+
+#pragma UIScrollViewDelegate Methods
+
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [[NSNotificationCenter defaultCenter] postNotificationName:TLSwipeForOptionsCellEnclosingTableViewDidBeginScrollingNotification object:scrollView];
+}
+
+#pragma mark - TLSwipeForOptionsCellDelegate Methods
+
+-(void)cellDidSelectApprove:(TLSwipeForOptionsCell *)cell {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
+    NSDictionary *selectedDict = [_objects objectAtIndex:indexPath.row];
+    
+    NSMutableString *clientName;
+    clientName = [NSMutableString stringWithFormat:@"%@",
+            [selectedDict objectForKeyedSubscript:deviceName]];
+    
+    NSMutableString *clientMac;
+    clientMac = [NSMutableString stringWithFormat:@"%@",
+              [selectedDict objectForKey:deviceMac]];
+    
+    NSMutableString *clientAccess;
+    clientAccess = [NSMutableString stringWithFormat:@"%@",
+                 [selectedDict objectForKey:deviceAccess]? @"Yes" : @"No"];
+
+    NSLog(@"%@",[NSString stringWithFormat:@"Approved: %@:%@:%@",clientName,clientMac,clientAccess]);
+}
+
+-(void)cellDidSelectBlock:(TLSwipeForOptionsCell *)cell {
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
+    NSDictionary *selectedDict = [_objects objectAtIndex:indexPath.row];
+    
+    NSMutableString *clientName;
+    clientName = [NSMutableString stringWithFormat:@"%@",
+                  [selectedDict objectForKeyedSubscript:deviceName]];
+    
+    NSMutableString *clientMac;
+    clientMac = [NSMutableString stringWithFormat:@"%@",
+                 [selectedDict objectForKey:deviceMac]];
+    
+    NSMutableString *clientAccess;
+    clientAccess = [NSMutableString stringWithFormat:@"%@",
+                    [selectedDict objectForKey:deviceAccess]? @"Yes" : @"No"];
+    
+    NSLog(@"%@",[NSString stringWithFormat:@"Blocked: %@:%@:%@",clientName,clientMac,clientAccess]);
 }
 
 @end

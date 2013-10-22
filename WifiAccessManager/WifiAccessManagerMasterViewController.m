@@ -206,6 +206,27 @@
                  [selectedDict objectForKey:deviceAccess]? @"Yes" : @"No"];
 
     NSLog(@"%@",[NSString stringWithFormat:@"Approved: %@:%@:%@",clientName,clientMac,clientAccess]);
+    
+    HttpRequestUtilities *httpHelper = [[HttpRequestUtilities alloc] init];
+    if([httpHelper postClientAccess:clientName withMac:clientMac andStatus:true]){
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Approve Success"
+                                                                 delegate:nil
+                                                        cancelButtonTitle:nil
+                                                   destructiveButtonTitle:@"OK"
+                                                        otherButtonTitles:nil];
+        
+        actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+        [actionSheet showInView:self.view];
+    }else{
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Approve Failed"
+                                                                 delegate:nil
+                                                        cancelButtonTitle:nil
+                                                   destructiveButtonTitle:@"OK"
+                                                        otherButtonTitles:nil];
+        
+        actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+        [actionSheet showInView:self.view];
+    }
 }
 
 -(void)cellDidSelectBlock:(TLSwipeForOptionsCell *)cell {
@@ -226,6 +247,27 @@
                     [selectedDict objectForKey:deviceAccess]? @"Yes" : @"No"];
     
     NSLog(@"%@",[NSString stringWithFormat:@"Blocked: %@:%@:%@",clientName,clientMac,clientAccess]);
+    
+    HttpRequestUtilities *httpHelper = [[HttpRequestUtilities alloc] init];
+    if([httpHelper postClientAccess:clientName withMac:clientMac andStatus:false]){
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Block Success"
+                                                                 delegate:nil
+                                                        cancelButtonTitle:nil
+                                                   destructiveButtonTitle:@"OK"
+                                                        otherButtonTitles:nil];
+        
+        actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+        [actionSheet showInView:self.view];
+    }else{
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Block Failed"
+                                                                 delegate:nil
+                                                        cancelButtonTitle:nil
+                                                   destructiveButtonTitle:@"OK"
+                                                        otherButtonTitles:nil];
+        
+        actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+        [actionSheet showInView:self.view];
+    }
 }
 
 @end

@@ -12,5 +12,5 @@
 
 - (BOOL)loginRequest:(NSString *)email withPassword:(NSString *)pwd;
 - (NSData *)getRequestDevices:(NSString *)userId;
-
+- (BOOL)postClientAccess:(NSString *)clientName withMac:(NSString *)macAddress andStatus:(BOOL)status;
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		299867931815CE2A00A39C45 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 299867921815CE2A00A39C45 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		29A212421814967500B637F0 /* TLSwipeForOptionsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A212411814967500B637F0 /* TLSwipeForOptionsCell.m */; };
 		29B4052D18116865004BC37E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B4052C18116865004BC37E /* Foundation.framework */; };
 		29B4052F18116865004BC37E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B4052E18116865004BC37E /* CoreGraphics.framework */; };
@@ -39,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		299867911815CE2A00A39C45 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		299867921815CE2A00A39C45 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		29A212401814967500B637F0 /* TLSwipeForOptionsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLSwipeForOptionsCell.h; sourceTree = "<group>"; };
 		29A212411814967500B637F0 /* TLSwipeForOptionsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLSwipeForOptionsCell.m; sourceTree = "<group>"; };
 		29B4052918116865004BC37E /* WifiAccessManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WifiAccessManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +147,8 @@
 				29B4056518116C1B004BC37E /* WifiAccessManagerLoginViewController.m */,
 				29A212401814967500B637F0 /* TLSwipeForOptionsCell.h */,
 				29A212411814967500B637F0 /* TLSwipeForOptionsCell.m */,
+				299867911815CE2A00A39C45 /* JSONKit.h */,
+				299867921815CE2A00A39C45 /* JSONKit.m */,
 			);
 			path = WifiAccessManager;
 			sourceTree = "<group>";
@@ -280,6 +285,7 @@
 			files = (
 				29B4054618116865004BC37E /* WifiAccessManagerDetailViewController.m in Sources */,
 				29B4056618116C1B004BC37E /* WifiAccessManagerLoginViewController.m in Sources */,
+				299867931815CE2A00A39C45 /* JSONKit.m in Sources */,
 				29B4057218118C3D004BC37E /* HttpRequestUtilities.m in Sources */,
 				29B4053918116865004BC37E /* main.m in Sources */,
 				29B4054318116865004BC37E /* WifiAccessManagerMasterViewController.m in Sources */,

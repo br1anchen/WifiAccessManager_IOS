@@ -47,10 +47,22 @@
     deviceAccess = @"request Result";
     _objects = [[NSMutableArray alloc] init];
     
+    [self loadTableData];
+    
+    NSTimer *updateTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(loadTableData) userInfo:nil repeats:YES];
+    [updateTimer fire];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:TLSwipeForOptionsCellEnclosingTableViewDidBeginScrollingNotification object:self.tableView];
+}
+
+- (void)loadTableData
+{
+    NSLog(@"load data");
+    
+    [_objects removeAllObjects];
+    
     NSUserDefaults *userPrefs = [NSUserDefaults standardUserDefaults];
     NSString *userId = [userPrefs stringForKey:@"Email"];
-    
-    NSLog(@"%@",userId);
     
     HttpRequestUtilities *httpHelper = [[HttpRequestUtilities alloc] init];
     NSData *deviceSources = [httpHelper getRequestDevices:userId];
@@ -63,29 +75,29 @@
             NSDictionary *client_data = [dataDict objectForKey:@"client"];
             
             NSDictionary *clientInfo_data = [client_data objectForKey:@"client_info"];
-            NSDictionary *permissions_data = [client_data objectForKey:@"permissions"];
+            NSDictionary *permissionsDic = [client_data objectForKey:@"permissions"];
             
             NSString *deviceName_data = [clientInfo_data objectForKey:@"name"];
             NSString *deviceMac_data = [clientInfo_data objectForKey:@"mac"];
-            BOOL deviceAccess_data = (BOOL)[permissions_data objectForKey:@"allow"];
             
-            NSLog(@"DEVICENAME: %@",deviceName_data);
-            NSLog(@"DEVICEMAC: %@",deviceMac_data);
-            NSLog(deviceAccess_data ? @"Yes" : @"No");
+            NSDictionary *deviceAccess_data = [permissionsDic objectForKey:@"access"];
+            NSString *deviceRequestResult_data = [[deviceAccess_data objectForKey:@"allow"] boolValue] ? @"YES": @"NO";
+            
+//            NSLog(@"DEVICENAME: %@",deviceName_data);
+//            NSLog(@"DEVICEMAC: %@",deviceMac_data);
+//            NSLog(deviceAccess_data ? @"Yes" : @"No");
             
             DeviceDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                          deviceName_data, deviceName,
-                          deviceMac_data, deviceMac,
-                          deviceAccess_data,deviceAccess,
-                          nil];
+                                deviceName_data, deviceName,
+                                deviceMac_data, deviceMac,
+                                deviceRequestResult_data,deviceAccess,
+                                nil];
             [_objects addObject:DeviceDictionary];
         }
-
+        
     }
     
     [self.tableView reloadData];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:TLSwipeForOptionsCellEnclosingTableViewDidBeginScrollingNotification object:self.tableView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -127,6 +139,12 @@
             [tmpDict objectForKeyedSubscript:deviceName],[tmpDict objectForKey:deviceMac]];
     
     cell.textLabel.text = text;
+    
+    if([[tmpDict objectForKey:deviceAccess] isEqualToString:@"YES"]){
+        cell.textLabel.textColor = [UIColor greenColor];
+    }else{
+        cell.textLabel.textColor = [UIColor redColor];
+    }
     
     cell.delegate = self;
     
@@ -203,7 +221,7 @@
     
     NSMutableString *clientAccess;
     clientAccess = [NSMutableString stringWithFormat:@"%@",
-                 [selectedDict objectForKey:deviceAccess]? @"Yes" : @"No"];
+                 [selectedDict objectForKey:deviceAccess]];
 
     NSLog(@"%@",[NSString stringWithFormat:@"Approved: %@:%@:%@",clientName,clientMac,clientAccess]);
     
@@ -227,6 +245,8 @@
         actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
         [actionSheet showInView:self.view];
     }
+    
+    [self loadTableData];
 }
 
 -(void)cellDidSelectBlock:(TLSwipeForOptionsCell *)cell {
@@ -244,7 +264,7 @@
     
     NSMutableString *clientAccess;
     clientAccess = [NSMutableString stringWithFormat:@"%@",
-                    [selectedDict objectForKey:deviceAccess]? @"Yes" : @"No"];
+                    [selectedDict objectForKey:deviceAccess]];
     
     NSLog(@"%@",[NSString stringWithFormat:@"Blocked: %@:%@:%@",clientName,clientMac,clientAccess]);
     
@@ -268,6 +288,8 @@
         actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
         [actionSheet showInView:self.view];
     }
+    
+    [self loadTableData];
 }
 
 @end

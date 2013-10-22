@@ -63,6 +63,8 @@
         [self performSegueWithIdentifier: @"afterLogin" sender: self];
     }else{
         NSLog(@"Login Failed.");
+        UIAlertView *loginAlert = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"Please check your user information then login again" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+        [loginAlert show];
     }
 }
 

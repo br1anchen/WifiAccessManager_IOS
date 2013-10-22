@@ -14,7 +14,6 @@
 
 - (BOOL)loginRequest:(NSString *)email withPassword:(NSString *)pwd
 {
-    __block BOOL loginResult;
     
     NSString *loginUrl = [managerServerUrl stringByAppendingString:@"/admin/mobile/loginapp.php"];
     
@@ -22,7 +21,7 @@
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:120];
     
-    NSString* postDataString  = [NSString stringWithFormat:@"email=%@",email];
+    NSString* postDataString  = [NSString stringWithFormat:@"email=%@&password=%@",email,pwd];
     
     
     [request setHTTPMethod:@"POST"];
@@ -30,21 +29,16 @@
     [request setValue:@"application/x-www-form-urlencoded;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     
-    [NSURLConnection sendAsynchronousRequest:request
-        queue:[NSOperationQueue currentQueue]
-        completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-            if (response) {
-                NSHTTPURLResponse* newResp = (NSHTTPURLResponse*)response;
-                NSLog(@"%ld", (long)newResp.statusCode);
-                loginResult = true;
-            }
-            else {
-                NSLog(@"No response received");
-                loginResult = FALSE;
-            }
-    }];
+    NSURLResponse *response;
+    NSError *error;
     
-    return loginResult;
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    if(response){
+        return TRUE;
+    }else{
+        return FALSE;
+    }
 }
 
 - (NSData *)getRequestDevices:(NSString *)userId

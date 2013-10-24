@@ -80,8 +80,17 @@
             NSString *deviceName_data = [clientInfo_data objectForKey:@"name"];
             NSString *deviceMac_data = [clientInfo_data objectForKey:@"mac"];
             
-            NSDictionary *deviceAccess_data = [permissionsDic objectForKey:@"access"];
-            NSString *deviceRequestResult_data = [[deviceAccess_data objectForKey:@"allow"] boolValue] ? @"YES": @"NO";
+            NSString *deviceRequestResult_data;
+            
+            if(permissionsDic != NULL)
+            {
+                NSDictionary *deviceAccess_data = [permissionsDic objectForKey:@"access"];
+                deviceRequestResult_data = [[deviceAccess_data objectForKey:@"allow"] boolValue] ? @"YES": @"NO";
+            }else
+            {
+                deviceRequestResult_data = @"NULL";
+            }
+
             
 //            NSLog(@"DEVICENAME: %@",deviceName_data);
 //            NSLog(@"DEVICEMAC: %@",deviceMac_data);
@@ -142,8 +151,10 @@
     
     if([[tmpDict objectForKey:deviceAccess] isEqualToString:@"YES"]){
         cell.textLabel.textColor = [UIColor greenColor];
-    }else{
+    }else if([[tmpDict objectForKey:deviceAccess] isEqualToString:@"NO"]){
         cell.textLabel.textColor = [UIColor redColor];
+    }else{
+        cell.textLabel.textColor = [UIColor blackColor];
     }
     
     cell.delegate = self;
@@ -218,12 +229,8 @@
     NSMutableString *clientMac;
     clientMac = [NSMutableString stringWithFormat:@"%@",
               [selectedDict objectForKey:deviceMac]];
-    
-    NSMutableString *clientAccess;
-    clientAccess = [NSMutableString stringWithFormat:@"%@",
-                 [selectedDict objectForKey:deviceAccess]];
 
-    NSLog(@"%@",[NSString stringWithFormat:@"Approved: %@:%@:%@",clientName,clientMac,clientAccess]);
+    NSLog(@"%@",[NSString stringWithFormat:@"Approved: %@:%@",clientName,clientMac]);
     
     HttpRequestUtilities *httpHelper = [[HttpRequestUtilities alloc] init];
     if([httpHelper postClientAccess:clientName withMac:clientMac andStatus:true]){
@@ -262,11 +269,7 @@
     clientMac = [NSMutableString stringWithFormat:@"%@",
                  [selectedDict objectForKey:deviceMac]];
     
-    NSMutableString *clientAccess;
-    clientAccess = [NSMutableString stringWithFormat:@"%@",
-                    [selectedDict objectForKey:deviceAccess]];
-    
-    NSLog(@"%@",[NSString stringWithFormat:@"Blocked: %@:%@:%@",clientName,clientMac,clientAccess]);
+    NSLog(@"%@",[NSString stringWithFormat:@"Blocked: %@:%@",clientName,clientMac]);
     
     HttpRequestUtilities *httpHelper = [[HttpRequestUtilities alloc] init];
     if([httpHelper postClientAccess:clientName withMac:clientMac andStatus:false]){

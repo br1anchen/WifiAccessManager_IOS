@@ -21,6 +21,8 @@
     NSString *deviceName;
     NSString *deviceMac;
     NSString *deviceAccess;
+    
+    NSTimer *updateTimer;
 }
 @end
 
@@ -49,7 +51,7 @@
     
     [self loadTableData];
     
-    NSTimer *updateTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(loadTableData) userInfo:nil repeats:YES];
+    updateTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(loadTableData) userInfo:nil repeats:YES];
     [updateTimer fire];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:TLSwipeForOptionsCellEnclosingTableViewDidBeginScrollingNotification object:self.tableView];
@@ -121,6 +123,7 @@
     [userPref removeObjectForKey:@"Email"];
     [userPref synchronize];
     
+    [updateTimer invalidate];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

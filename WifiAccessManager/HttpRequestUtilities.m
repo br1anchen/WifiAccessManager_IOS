@@ -9,6 +9,7 @@
 #import "HttpRequestUtilities.h"
 #import "AppCommonUtilities.h"
 #import "JSONKit.h"
+#import "Base64.h"
 
 @implementation HttpRequestUtilities
 
@@ -21,7 +22,7 @@
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:120];
     
-    NSString* postDataString  = [NSString stringWithFormat:@"email=%@&password=%@",email,pwd];
+    NSString* postDataString  = [NSString stringWithFormat:@"email=%@&password=%@",[email base64EncodedString],[pwd base64EncodedString]];
     
     
     [request setHTTPMethod:@"POST"];
